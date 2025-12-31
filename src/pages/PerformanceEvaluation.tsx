@@ -82,7 +82,7 @@ const getWorkColor = (type: string) => {
     case "image": return "bg-secondary/10 text-secondary";
     case "video": return "bg-coral/10 text-coral";
     case "link": return "bg-accent/10 text-accent";
-    default: return "bg-muted text-muted-foreground";
+    default: return "bg-primary/5 text-primary";
   }
 };
 
