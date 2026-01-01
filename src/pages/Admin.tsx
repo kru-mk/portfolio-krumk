@@ -144,7 +144,7 @@ export default function Admin() {
       </header>
 
       <main className="container mx-auto px-4 py-8">
-        <Tabs defaultValue="pa" className="space-y-6">
+        <Tabs defaultValue="profile" className="space-y-6">
           <TabsList className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 h-auto p-1">
             <TabsTrigger value="profile">Profile</TabsTrigger>
             <TabsTrigger value="highlights">Highlights</TabsTrigger>
