@@ -14,11 +14,7 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
-
 import { Stat } from "@/types";
-
-// Remove local interface Stat
-// interface Stat { ... }
 
 const ICONS = [
     { name: "Trophy", icon: Trophy },
@@ -33,12 +29,12 @@ const ICONS = [
 ];
 
 const COLORS = [
-    { name: "Primary (Red/Pink)", class: "text-primary" },
-    { name: "Secondary (Blue)", class: "text-secondary" },
-    { name: "Accent (Purple)", class: "text-accent" },
-    { name: "Coral (Orange)", class: "text-coral" },
-    { name: "Green", class: "text-green-600" },
-    { name: "Yellow", class: "text-yellow-500" },
+    { name: "Primary (Red/Pink)", class: "text-primary", bgClass: "bg-primary" },
+    { name: "Secondary (Blue)", class: "text-secondary", bgClass: "bg-secondary" },
+    { name: "Accent (Purple)", class: "text-accent", bgClass: "bg-accent" },
+    { name: "Coral (Orange)", class: "text-coral", bgClass: "bg-coral" },
+    { name: "Green", class: "text-green-600", bgClass: "bg-green-600" },
+    { name: "Yellow", class: "text-yellow-500", bgClass: "bg-yellow-500" },
 ];
 
 export function StatsEditor() {
@@ -194,13 +190,13 @@ export function StatsEditor() {
                                     onValueChange={(val) => handleUpdate(index, "color_class", val)}
                                 >
                                     <SelectTrigger>
-                                        <div className={`w-4 h-4 rounded-full ${item.color_class.replace('text-', 'bg-')}`}></div>
+                                        <div className={`w-4 h-4 rounded-full ${COLORS.find(c => c.class === item.color_class)?.bgClass || 'bg-primary'}`}></div>
                                     </SelectTrigger>
                                     <SelectContent>
                                         {COLORS.map(color => (
                                             <SelectItem key={color.name} value={color.class}>
                                                 <div className="flex items-center gap-2">
-                                                    <div className={`w-4 h-4 rounded-full ${color.class.replace('text-', 'bg-')}`}></div>
+                                                    <div className={`w-4 h-4 rounded-full ${color.bgClass}`}></div>
                                                     <span>{color.name}</span>
                                                 </div>
                                             </SelectItem>
