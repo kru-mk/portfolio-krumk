@@ -397,8 +397,13 @@ WHERE NOT EXISTS (SELECT 1 FROM public.certificates LIMIT 1);
 -- Fix: Update Activity Colors to match Theme (Pink, Mint, Sky)
 UPDATE public.activities
 SET color_gradient_class = CASE
-    WHEN title LIKE '%�ͺ�ѭ����ó���%' OR title LIKE '%�١����%' THEN 'from-secondary to-mint'
-    WHEN title LIKE '%�ѡ�����ҹ%' OR title LIKE '%�ç���¹�բ��%' THEN 'from-lavender to-sky'
+    WHEN title LIKE '%ตอบปัญหาวรรณคดี%' OR title LIKE '%ลูกเสือ%' THEN 'from-secondary to-mint'
+    WHEN title LIKE '%รักการอ่าน%' OR title LIKE '%โรงเรียนสีขาว%' THEN 'from-lavender to-sky'
     ELSE 'from-primary to-coral'
 END
 WHERE color_gradient_class NOT IN ('from-secondary to-mint', 'from-lavender to-sky', 'from-primary to-coral');
+
+-- Fix: Ensure Profile columns exist (Migration)
+ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS facebook_url TEXT;
+ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS line_url TEXT;
+ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS google_map_url TEXT;
