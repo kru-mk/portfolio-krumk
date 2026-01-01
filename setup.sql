@@ -234,10 +234,13 @@ CREATE POLICY "Auth Delete PA" ON storage.objects FOR DELETE USING (bucket_id = 
 -- 5.1 PA Categories (Standard 3 Domains)
 INSERT INTO public.pa_categories (category_number, title, icon, color)
 VALUES
-  (1, 'ด้านการจัดการเรียนรู้', 'BookOpen', 'from-blue-600 to-cyan-500'),
-  (2, 'ด้านการส่งเสริมและสนับสนุนการจัดการเรียนรู้', 'Users', 'from-emerald-500 to-teal-400'),
-  (3, 'ด้านการพัฒนาตนเองและวิชาชีพ', 'TrendingUp', 'from-purple-600 to-pink-500')
-ON CONFLICT (category_number) DO NOTHING;
+  (1, 'ด้านการจัดการเรียนรู้', 'BookOpen', 'from-pink-500 to-rose-400'),
+  (2, 'ด้านการส่งเสริมและสนับสนุนการจัดการเรียนรู้', 'Users', 'from-emerald-400 to-teal-400'),
+  (3, 'ด้านการพัฒนาตนเองและวิชาชีพ', 'TrendingUp', 'from-orange-400 to-amber-400')
+ON CONFLICT (category_number) DO UPDATE SET
+  title = EXCLUDED.title,
+  icon = EXCLUDED.icon,
+  color = EXCLUDED.color;
 
 -- 5.2 PA Indicators (Standard 15 Indicators for ว9/2564)
 -- We use a CTE or variables, but for plain SQL we can use subqueries.
