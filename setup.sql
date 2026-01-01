@@ -391,3 +391,14 @@ WHERE NOT EXISTS (SELECT 1 FROM public.certificates LIMIT 1);
 INSERT INTO public.certificates (title, issuer, year, type, icon_name, color_class, bg_class, display_order)
 SELECT '‡∏ß‡∏¥‡∏ó‡∏¢‡∏≤‡∏Å‡∏£‡πÇ‡∏Ñ‡∏£‡∏á‡∏Å‡∏≤‡∏£‡∏Ñ‡πà‡∏≤‡∏¢‡∏†‡∏≤‡∏©‡∏≤‡πÑ‡∏ó‡∏¢', '‡πÇ‡∏£‡∏á‡πÄ‡∏£‡∏µ‡∏¢‡∏ô‡∏ö‡πâ‡∏≤‡∏ô‡∏´‡∏ô‡∏≠‡∏á‡∏ô‡∏≤', '2566', 'guest_speaker', 'Mic', 'text-purple-600', 'bg-purple-100', 3
 WHERE NOT EXISTS (SELECT 1 FROM public.certificates LIMIT 1);
+
+-- 6. MIGRATION / FIXES (Auto-update existing data)
+
+-- Fix: Update Activity Colors to match Theme (Pink, Mint, Sky)
+UPDATE public.activities
+SET color_gradient_class = CASE
+    WHEN title LIKE '%µÕ∫ª—≠À“«√√≥§¥’%' OR title LIKE '%≈Ÿ°‡ ◊Õ%' THEN 'from-secondary to-mint'
+    WHEN title LIKE '%√—°°“√ÕË“π%' OR title LIKE '%‚√ß‡√’¬π ’¢“«%' THEN 'from-lavender to-sky'
+    ELSE 'from-primary to-coral'
+END
+WHERE color_gradient_class NOT IN ('from-secondary to-mint', 'from-lavender to-sky', 'from-primary to-coral');
